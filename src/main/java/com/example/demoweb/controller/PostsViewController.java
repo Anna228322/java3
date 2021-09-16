@@ -1,5 +1,6 @@
 package com.example.demoweb.controller;
 
+import com.example.demoweb.model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demoweb.service.PostService;
 
+import java.util.List;
+
 @Controller
 public class PostsViewController {
 
@@ -17,8 +20,9 @@ public class PostsViewController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String list(Model model) {
+        List<Post> e = postsService.listAllPosts();
         model.addAttribute("appName", "Моё супер приложение");
-        model.addAttribute("posts", postsService.listAllPosts());
+        model.addAttribute("posts", e);
         return "list";
     }
 
